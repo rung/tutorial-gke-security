@@ -19,7 +19,17 @@ gcloud services enable container.googleapis.com
 gcloud container clusters create gke-security-testing --zone=asia-northeast1 --async
 ```
 
-- Get a credential
+- Get a credential of GKE
 ```bash
-gcloud container clusters get-credentials gke-security-testing --zone=asia-northeast1
+cloud container clusters create gke-security-testing --zone asia-northeast1-a --machine-type f1-micro --num-nodes 3 --async
+```
+
+# Exercise 1: PodSecurityPolicy
+
+
+# Exercise 2: Workload Identity
+
+# Clean cluster
+```bash
+gcloud container clusters delete gke-security-testing --zone asia-northeast1-a --async
 ```
