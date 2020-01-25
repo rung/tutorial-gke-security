@@ -68,3 +68,9 @@ It contains "KUBELET_KEY".
 ```bash
 gcloud container clusters delete gke-security-testing --zone us-central1-a --async
 ```
+
+
+## References
+- [SSRF in Exchange leads to ROOT access in all instances](https://hackerone.com/reports/341876)
+- [Hacking Kubelet on Google Kubernetes Engine](https://www.4armed.com/blog/hacking-kubelet-on-gke/)
+- [The Path Less Traveled: Abusing Kubernetes Defaults](https://speakerdeck.com/iancoldwater/the-path-less-traveled-abusing-kubernetes-defaults)
