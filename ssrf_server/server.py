@@ -14,8 +14,11 @@ def get_contents():
     curl.setopt(pycurl.TIMEOUT, 10)
     buffer = io.BytesIO()
     curl.setopt(curl.WRITEDATA, buffer)
-    curl.perform()
-    body = buffer.getvalue()
+    try:
+        curl.perform()
+        body = buffer.getvalue()
+    except Exception as e:
+        body = str(e)
     return template("get.html", contents=body)
 
 run(host='0.0.0.0', port=8080, debug=True)
