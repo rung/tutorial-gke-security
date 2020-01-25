@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssrf-server
+spec:
+  selector:
+    matchLabels:
+      app: ssrf-server
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: ssrf-server
+    spec:
+      containers:
+      - name: ssrf-server
+        image: suezawa/vulnerable-ssrf-server
+        ports:
+        - containerPort: 8080

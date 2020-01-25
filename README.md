@@ -16,12 +16,12 @@ gcloud services enable container.googleapis.com
 
 - Create GKE Cluster
 ```bash
-gcloud container clusters create gke-security-testing --zone asia-northeast1-a --machine-type f1-micro --num-nodes 3 --async
+gcloud container clusters create gke-security-testing --zone us-central1-a --machine-type g1-small --num-nodes 3 --async
 ```
 
 - Get a credential of GKE
 ```bash
-gcloud container clusters get-credentials gke-security-testing --zone=asia-northeast1-a
+gcloud container clusters get-credentials gke-security-testing --zone=us-central1-a
 ```
 
 - Testing
@@ -44,5 +44,5 @@ kubectl apply -f manifest -R
 
 ### (After this training) Clean cluster
 ```bash
-gcloud container clusters delete gke-security-testing --zone asia-northeast1-a --async
+gcloud container clusters delete gke-security-testing --zone us-central1-a --async
 ```
