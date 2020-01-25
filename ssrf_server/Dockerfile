@@ -16,4 +16,4 @@ RUN chown -R server:server /home/server
 
 USER server
 EXPOSE 8080
-CMD ["python", "server.py"]
+ENTRYPOINT ["python", "server.py"]
