@@ -1,8 +1,7 @@
 FROM python:3
 
 RUN apt update -y && apt full-upgrade -y && \
-    apt install vim netcat -y
-
+    apt clean && rm -rf /var/lib/apt/lists/*
 RUN pip install bottle pycurl
 
 # Add unprivileged user
@@ -16,4 +15,4 @@ RUN chown -R server:server /home/server
 
 USER server
 EXPOSE 8080
-ENTRYPOINT ["python", "server.py"]
+CMD ["python", "server.py"]
