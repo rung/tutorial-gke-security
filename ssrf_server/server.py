@@ -18,7 +18,7 @@ def get_contents():
         curl.perform()
         body = buffer.getvalue()
     except Exception as e:
-        body = str(e)
+        body = str(e) + ":" + buffer.getvalue()
     return template("get.html", contents=body)
 
 run(host='0.0.0.0', port=8080, debug=True)
