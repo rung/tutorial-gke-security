@@ -40,7 +40,7 @@ kubectl apply -f manifest -R
 (Please don't expose deployment on the Internet through Service.)
 
 - Open Web Preview
-![web-view](img/web-preview.png)
+<img src="img/web-preview.png" width="320">
 
 ### (After this training) Clean cluster
 ```bash
