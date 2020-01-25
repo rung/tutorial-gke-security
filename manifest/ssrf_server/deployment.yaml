@@ -15,5 +15,11 @@ spec:
       containers:
       - name: ssrf-server
         image: suezawa/vulnerable-ssrf-server
+        env:
+        - name: DB_Password
+          valueFrom:
+            secretKeyRef:
+              name: dummy-secret
+              key: dummy-secret
         ports:
         - containerPort: 8080

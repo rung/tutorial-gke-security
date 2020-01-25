@@ -29,13 +29,13 @@ gcloud container clusters get-credentials gke-security-testing --zone=us-central
 kubectl get node
 ```
 
-### Exercise 1: PodSecurityPolicy
+### Demo 1: PodSecurityPolicy
 - Apply k8s manifest and run
 - See credentials
 
 - How to block
 
-### Exercise 2: Workload Identity
+### Demo 2: Workload Identity
 - Apply k8s manifest
 ```
 kubectl apply -f manifest -R
@@ -86,13 +86,10 @@ KUBE_OPT="--client-certificate newcert/node.crt --client-key newcert/new.key --c
 echo $KUBE_OPT
 
 # Get secretName
-kubectl $KUBE_OPT get pod -o yaml | grep secretName
-        secretName: default-token-8dhcz
-        secretName: default-token-8dhcz
-        secretName: default-token-8dhcz
+kubectl describe pod | grep secret
 
 # Get secret
-kubectl $KUBE_OPT get secret default-token-8dhcz -o yaml
+kubectl get secret dummy-secret -o yaml
 ```
 
 ### (After this training) Clean cluster
