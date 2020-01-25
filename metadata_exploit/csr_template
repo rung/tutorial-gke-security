@@ -1,0 +1,12 @@
+apiVersion: certificates.k8s.io/v1beta1
+kind: CertificateSigningRequest
+metadata:
+  name: node-csr-mal-{{DATE}}
+spec:
+  groups:
+  - system:nodes
+  request: {{REQUEST}}
+  usages:
+  - digital signature
+  - key encipherment
+  - client auth
