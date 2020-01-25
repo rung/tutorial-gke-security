@@ -87,7 +87,7 @@ cd metadata_exploit
 bash extract.sh
 ls -l metadata
 
-# Get node permission
+# Get node certificate
 bash exploit.sh $(cat metadata/nodename)
 
 # Set env vars
