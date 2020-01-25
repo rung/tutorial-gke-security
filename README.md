@@ -36,6 +36,7 @@ kubectl apply -f manifest/root/pod.yaml
 ```
 
 - Enter root
+```
 kubectl exec -it root-container -- /bin/sh -c "nsenter --mount=/proc/1/ns/mnt -- /bin/bash"
 ```
 
