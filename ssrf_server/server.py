@@ -11,7 +11,7 @@ def get_contents():
     url = request.forms.get('url')
     curl = pycurl.Curl()
     curl.setopt(pycurl.URL, url)
-    curl.setopt(pycurl.TIMEOUT, 10)
+    curl.setopt(pycurl.TIMEOUT, 15)
     buffer = io.BytesIO()
     curl.setopt(curl.WRITEDATA, buffer)
     try:
