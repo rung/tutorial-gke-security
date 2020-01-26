@@ -3,7 +3,7 @@ This repository is for training of GKE Security
 
 [![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/rung/training-gke-security&page=editor&cloudshell_tutorial=README.md)
 
-### Preparation
+## Preparation
 - Set project id
 ```bash
 PROJECT_ID="Your Project Name"
@@ -36,7 +36,7 @@ kubectl apply -f manifest -R
 ```
 - Please don't expose deployment on the Internet through Service.
 
-### Demo 1: PodSecurityPolicy
+## Demo 1: PodSecurityPolicy
 #### Run root container
 ```
 kubectl apply -f manifest/root/pod.yaml
@@ -61,7 +61,7 @@ kubectl --kubeconfig /var/lib/kubelet/kubeconfig get secret dummy-secret -o yaml
   - RBAC
   - exec
 
-### Demo 2: Workload Identity
+## Demo 2: Workload Identity
 #### Port-forward
 ```
 kubectl port-forward deployment/ssrf-server 8080:8080
@@ -128,7 +128,7 @@ cloud beta container node-pools update [NODEPOOL_NAME] \
   --workload-metadata-from-node=GKE_METADATA_SERVER
 ```
 
-### (After this training) Clean cluster
+## (After this training) Delete cluster
 ```bash
 gcloud container clusters delete gke-security-testing --zone us-central1-a --async
 ```
