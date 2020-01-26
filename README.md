@@ -150,14 +150,13 @@ gopher://169.254.169.254:80/_GET /computeMetadata/v1/instance/service-accounts/d
 
 ### How to block
 #### [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity)
+- Enable workload identity (Need much time)
 ```
 gcloud beta container clusters update gke-security-testing --identity-namespace=${PROJECT_ID}.svc.id.goog --region us-central1-a
 ```
 
 ```
-cloud beta container node-pools update [NODEPOOL_NAME] \
-  --cluster=[CLUSTER_NAME] \
-  --workload-metadata-from-node=GKE_METADATA_SERVER
+gcloud beta container node-pools update default-pool --cluster=gke-security-testing --workload-metadata-from-node=GKE_METADATA_SERVER --zone us-central1-a
 ```
 
 ## (After this training) Delete cluster
