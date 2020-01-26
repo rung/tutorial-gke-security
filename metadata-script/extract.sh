@@ -14,6 +14,6 @@ cat $FILENAME | perl -MMIME::Base64 -nle '/KUBELET_CERT: (.*?)\\n/ and print dec
 cat $FILENAME | perl -MMIME::Base64 -nle '/KUBELET_KEY: (.*?)\\n/ and print decode_base64($1)' > metadata/client.key
 cat $FILENAME | perl -MMIME::Base64 -nle '/CA_CERT: (.*?)\\n/ and print decode_base64($1)' > metadata/ca.crt
 cat $FILENAME | perl -MMIME::Base64 -nle '/KUBERNETES_MASTER_NAME: (.*?)\\n/ and print $1' > metadata/api_ip
-cat metadata.txt | perl -nle '/"name":"(gke-.*?)"/ and print $1' > metadata/nodename
+cat metadata.txt | perl -pe 's/&quot;/"/g' | perl -nle '/"name":"(gke-.*?)"/ and print $1' > metadata/nodename
 
 exit 0
