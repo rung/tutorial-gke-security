@@ -1,12 +1,15 @@
 # training-gke-security
-This repository is for training of GKE Security
+This repository is for demo of training of GKE Security
 
 [![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/rung/training-gke-security&page=editor&cloudshell_tutorial=README.md)
 
 ## Preparation
 #### Set project id
-```bash
+```
 PROJECT_ID="Your Project Name"
+```
+
+```
 gcloud config set project $PROJECT_ID
 ```
 
@@ -19,6 +22,7 @@ gcloud services enable container.googleapis.com
 ```bash
 gcloud container clusters create gke-security-testing --zone us-central1-a --machine-type g1-small --num-nodes 3 --async
 ```
+- You can check the status on [console](https://console.cloud.google.com/kubernetes/list)
 
 #### Get a credential of GKE
 ```bash
@@ -32,7 +36,7 @@ kubectl get node
 
 #### Deploy web server
 ```
-kubectl apply -f manifest -R
+kubectl apply -f manifest/ssrf_server/ -R
 ```
 - Please don't expose deployment on the Internet through Service.
 
@@ -49,12 +53,16 @@ kubectl exec -it root-container -- /bin/sh -c "nsenter --mount=/proc/1/ns/mnt --
 
 #### Get credentials
 ```
+kubectl --kubeconfig /var/lib/kubelet/kubeconfig get secret dummy-secret -o yaml
+```
+
+#### Get credentials(method 2)
+```
 docker ps -q | xargs docker inspect --format='{{range .Config.Env}}{{println .}}{{end}}' | grep DB_Password
 ```
 
-#### (References) Get credentials(method 2)
 ```
-kubectl --kubeconfig /var/lib/kubelet/kubeconfig get secret dummy-secret -o yaml
+exit
 ```
 
 #### How to block
@@ -68,7 +76,7 @@ kubectl port-forward deployment/ssrf-server 8080:8080
 ```
 
 #### Open Web Preview
-<img src="img/web-preview.png" width="320">
+<img src="https://github.com/rung/training-gke-security/raw/master/img/web-preview.png" width="320">
 
 #### Input url (for testing)
 ```
