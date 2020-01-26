@@ -4,7 +4,7 @@ This repository is for training of GKE Security
 [![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/rung/training-gke-security&page=editor&cloudshell_tutorial=README.md)
 
 ## Preparation
-- Set project id
+#### Set project id
 ```bash
 PROJECT_ID="Your Project Name"
 gcloud config set project $PROJECT_ID
@@ -111,13 +111,13 @@ kubectl describe pod | grep secret
 kubectl get secret dummy-secret -o yaml
 ```
 
-- (Reference) Get instance token (doesn't use it in this training)
+#### (Reference) Get instance token (doesn't use it in this training)
 ```
 gopher://169.254.169.254:80/_GET /computeMetadata/v1/instance/service-accounts/default/token HTTP/1.1%0d%0aMetadata-Flavor: Google%0d%0aConnection: Close%0d%0a%0d%0a
 ```
 
-#### How to block
-- [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity)
+### How to block
+#### [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity)
 ```
 gcloud beta container clusters update gke-security-testing --identity-namespace=${PROJECT_ID}.svc.id.goog --region us-central1-a
 ```
