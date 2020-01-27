@@ -20,7 +20,7 @@ gcloud services enable container.googleapis.com
 
 #### Create GKE Cluster
 ```bash
-gcloud container clusters create gke-security-testing --zone us-central1-a --machine-type g1-small --num-nodes 3 --async
+gcloud beta container clusters create gke-security-testing --zone us-central1-a --machine-type n1-standard-1 --num-nodes 3 --enable-pod-security-policy --async
 ```
 - You can check the status on [console](https://console.cloud.google.com/kubernetes/list)
 
@@ -40,7 +40,7 @@ kubectl apply -f manifest/ssrf_server/ -R
 ```
 - Please don't expose deployment on the Internet through Service.
 
-## Demo 1: PodSecurityPolicy
+## Demo 1: PodSecurityPolicy/RBAC
 #### Run root container
 ```
 kubectl apply -f manifest/root/pod.yaml
@@ -66,8 +66,28 @@ exit
 ```
 
 #### How to block
-  - RBAC
-  - exec
+- RBAC
+- PodSecurityPolicy
+
+```
+alias kubectl-user='kubectl --as=system:serviceaccount:default:unprivileged-user'
+```
+```
+kubectl delete pod root-container
+kubectl delete rolebinding default-psp
+```
+
+##### Apply PodSecurityPolicy and RBAC
+```
+kubectl apply -f manifest/psp/ -R
+```
+
+```
+kubectl-user apply -f manifest/root/pod.yaml
+```
+```
+kubectl-user get pod -n kube-system
+```
 
 ## Demo 2: Workload Identity
 #### Port-forward

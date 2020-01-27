@@ -1,0 +1,23 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: unprivileged-rbac-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: unprivileged-rbac
+subjects:
+- kind: ServiceAccount
+  name: unprivileged-user
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: default-psp
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: unprivileged-psp
+subjects:
+- kind: ServiceAccount
+  name: default
