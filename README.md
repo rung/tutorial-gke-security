@@ -74,6 +74,8 @@ alias kubectl-user='kubectl --as=system:serviceaccount:default:unprivileged-user
 ```
 ```
 kubectl delete pod root-container
+```
+```
 kubectl delete rolebinding default-psp
 ```
 
@@ -100,7 +102,7 @@ kubectl port-forward deployment/ssrf-server 8080:8080 2>&1 >/dev/null &
 
 #### Input url (for testing)
 ```
-https://www.google.com
+https://www.example.com
 ```
 
 #### Input malicious url
@@ -131,6 +133,8 @@ kubectl config get-contexts
 - Extract necessary data from metadata
 ```bash
 bash extract.sh
+```
+```
 ls -l metadata
 ```
 
