@@ -100,8 +100,8 @@ kubectl port-forward deployment/ssrf-server 8080:8080 2>&1 >/dev/null &
 ```
 
 #### Open Web Preview
-![web-preview](img/web-preview.png)
-![web-page](img/web-page.png)
+![web-preview](https://github.com/rung/training-gke-security/raw/master/img/web-preview.png)
+![web-page](https://github.com/rung/training-gke-security/raw/master/img/web-page.png)
 
 #### Input url (for testing)
 ```
@@ -115,7 +115,7 @@ gopher://169.254.169.254:80/_GET /computeMetadata/v1/instance/attributes/kube-en
 ```
 It contains "KUBELET_KEY".
 
-![web-metadata](img/web-metadata.png)
+![web-metadata](https://github.com/rung/training-gke-security/raw/master/img/web-metadata.png)
 
 #### Save the metadata to metadata-script/metadata.txt
 ```
@@ -188,7 +188,7 @@ gcloud beta container clusters update gke-security-testing --identity-namespace=
 gcloud beta container node-pools update default-pool --cluster=gke-security-testing --workload-metadata-from-node=GKE_METADATA_SERVER --zone us-central1-a
 ```
 
-![web-workload-identity-enabled.png](img/web-workload-identity-enabled.png)
+![web-workload-identity-enabled.png](https://github.com/rung/training-gke-security/raw/master/img/web-workload-identity-enabled.png)
 
 ## (After this training) Delete cluster
 ```bash
