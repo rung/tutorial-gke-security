@@ -84,9 +84,11 @@ kubectl delete rolebinding default-psp
 kubectl apply -f manifest/psp/ -R
 ```
 
+##### Try to deploy privileged pod
 ```
 kubectl-user apply -f manifest/root/pod.yaml
 ```
+##### Try to use kubectl to another namaspaces
 ```
 kubectl-user get pod -n kube-system
 ```
