@@ -56,7 +56,7 @@ kubectl exec -it root-container -- /bin/sh -c "nsenter --mount=/proc/1/ns/mnt --
 kubectl --kubeconfig /var/lib/kubelet/kubeconfig get secret dummy-secret -o yaml
 ```
 
-#### Get credentials(method 2)
+#### Get credentials(method 2) (Please copy this command from [GitHub](https://github.com/rung/tutorial-gke-security))
 ```
 docker ps -q | xargs docker inspect --format='{{range .Config.Env}}{{println .}}{{end}}' | grep DB_Password
 ```
