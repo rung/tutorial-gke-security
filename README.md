@@ -40,7 +40,7 @@ kubectl apply -f manifest/ssrf_server/ -R
 ```
 - Please don't expose deployment on the Internet through Service.
 
-## Demo 1: PodSecurityPolicy/RBAC
+## Demo 1: Compromised Developers' PC (PodSecurityPolicy/RBAC)
 #### Run root container
 ```
 kubectl apply -f manifest/root/pod.yaml
@@ -93,7 +93,7 @@ kubectl-user apply -f manifest/root/pod.yaml
 kubectl-user get pod -n kube-system
 ```
 
-## Demo 2: Workload Identity
+## Demo 2: Vulnerable Application (Workload Identity)
 #### Port-forward
 ```
 kubectl port-forward deployment/ssrf-server 8080:8080 2>&1 >/dev/null &
